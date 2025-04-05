@@ -16,12 +16,12 @@ if (process.argv.slice(2).length !== 0) {
 
 /* ======= mihomo alpha======= */
 const MIHOMO_ALPHA_VERSION_URL =
-  'https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt'
-const MIHOMO_ALPHA_URL_PREFIX = `https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha`
+  'https://github.com/ForestL18/mihomo/releases/download/Prerelease-winfw/version.txt'
+const MIHOMO_ALPHA_URL_PREFIX = `https://github.com/ForestL18/mihomo/releases/download/Prerelease-winfw`
 let MIHOMO_ALPHA_VERSION
 
 const MIHOMO_ALPHA_MAP = {
-  'win32-x64': 'mihomo-windows-amd64-compatible',
+  'win32-x64': 'mihomo-windows-amd64',
   'win32-ia32': 'mihomo-windows-386',
   'win32-arm64': 'mihomo-windows-arm64',
   'darwin-x64': 'mihomo-darwin-amd64-compatible',
@@ -52,7 +52,7 @@ const MIHOMO_URL_PREFIX = `https://github.com/MetaCubeX/mihomo/releases/download
 let MIHOMO_VERSION
 
 const MIHOMO_MAP = {
-  'win32-x64': 'mihomo-windows-amd64-compatible',
+  'win32-x64': 'mihomo-windows-amd64',
   'win32-ia32': 'mihomo-windows-386',
   'win32-arm64': 'mihomo-windows-arm64',
   'darwin-x64': 'mihomo-darwin-amd64-compatible',
