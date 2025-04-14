@@ -31,6 +31,8 @@ type MihomoProxyType =
   | 'Hysteria2'
   | 'Tuic'
   | 'WireGuard'
+  | 'Mieru'
+  | 'AnyTLS'
 type TunStack = 'gvisor' | 'mixed' | 'system'
 type FindProcessMode = 'off' | 'strict' | 'always'
 type DnsMode = 'normal' | 'fake-ip' | 'redir-host'
