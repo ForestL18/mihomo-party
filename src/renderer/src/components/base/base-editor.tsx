@@ -26,7 +26,7 @@ const monacoInitialization = (): void => {
     enableSchemaRequest: true,
     schemas: [
       {
-        uri: 'http://example.com/meta-json-schema.json',
+        uri: 'https://fastly.jsdelivr.net/gh/dongchengjie/meta-json-schema@main/schemas/meta-json-schema.json',
         fileMatch: ['**/*.clash.yaml'],
         // @ts-ignore // type JSONSchema7
         schema: {
