@@ -35,7 +35,7 @@ const ProxyProvider: React.FC = () => {
             setShowDetails((prev) => ({
               ...prev,
               show: true,
-              path: provider?.path || `proxies/${getHash(provider?.url)}`
+              path: provider?.path || `proxy_providers/${getHash(provider?.url)}`
             }))
           }
         } catch {
@@ -61,6 +61,7 @@ const ProxyProvider: React.FC = () => {
       })
 
       .filter(provider => 'subscriptionInfo' in provider)
+
       .sort((a, b) => {
         if (a.vehicleType === 'File' && b.vehicleType !== 'File') {
           return -1
@@ -144,7 +145,7 @@ const ProxyProvider: React.FC = () => {
                   setShowDetails({
                     show: false,
                     privderType: 'proxy-providers',
-                    path: provider.name,
+                    path: provider.name,  // provider.path don't exist in the core, so we use provider.name as a placeholder, useEffect() will fetch the path
                     type: provider.vehicleType,
                     title: provider.name
                   })

@@ -33,6 +33,8 @@
   "common.updater.versionReady": "Версия v{{version}} готова",
   "common.updater.goToDownload": "Перейти к загрузке",
   "common.updater.update": "Обновить",
+  "common.editor.edit": "Редактировать",
+  "common.viewer.view": "Просмотр",
   "settings.general": "Общие настройки",
   "settings.mihomo": "Настройки Mihomo",
   "settings.language": "Язык",

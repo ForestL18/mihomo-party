@@ -33,6 +33,8 @@
   "common.updater.versionReady": "v{{version}} 版本就绪",
   "common.updater.goToDownload": "前往下载",
   "common.updater.update": "更新",
+  "common.editor.edit": "编辑",
+  "common.viewer.view": "查看",
   "settings.general": "通用设置",
   "settings.mihomo": "Mihomo 设置",
   "settings.language": "语言",

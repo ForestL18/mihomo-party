@@ -33,6 +33,8 @@
   "common.updater.versionReady": "نسخه v{{version}} آماده است",
   "common.updater.goToDownload": "دانلود",
   "common.updater.update": "به‌روزرسانی",
+  "common.editor.edit": "ویرایش",
+  "common.viewer.view": "مشاهده",
   "settings.general": "تنظیمات عمومی",
   "settings.mihomo": "تنظیمات Mihomo",
   "settings.language": "زبان",

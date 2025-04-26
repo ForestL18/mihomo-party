@@ -36,7 +36,7 @@ const RuleProvider: React.FC = () => {
             setShowDetails((prev) => ({
               ...prev,
               show: true,
-              path: provider?.path || `rules/${getHash(provider?.url)}`
+              path: provider?.path || `rule_providers/${getHash(provider?.url)}`
             }))
           }
         } catch {
@@ -50,7 +50,18 @@ const RuleProvider: React.FC = () => {
   const { data, mutate } = useSWR('mihomoRuleProviders', mihomoRuleProviders)
   const providers = useMemo(() => {
     if (!data) return []
-    return Object.values(data.providers).sort((a, b) => {
+    return Object.values(data.providers)
+    .map(provider => {
+      if (provider.vehicleType === 'Inline') {
+        return {
+          ...provider,
+          format: 'YamlRule'
+        }
+      }
+      return provider
+    })
+
+    .sort((a, b) => {
       if (a.vehicleType === 'File' && b.vehicleType !== 'File') {
         return -1
       }
@@ -131,7 +142,7 @@ const RuleProvider: React.FC = () => {
                     setShowDetails({
                       show: false,
                       privderType: 'rule-providers',
-                      path: provider.name,
+                      path: provider.name, // provider.path don't exist in the core, so we use provider.name as a placeholder, useEffect() will fetch the path
                       type: provider.vehicleType,
                       title: provider.name,
                       format: provider.format
@@ -145,17 +156,20 @@ const RuleProvider: React.FC = () => {
                   )}
                 </Button>
               )}
-              <Button
-                isIconOnly
-                title={t('common.updater.update')}
-                className="ml-2"
-                size="sm"
-                onPress={() => {
-                  onUpdate(provider.name, index)
-                }}
-              >
-                <IoMdRefresh className={`text-lg ${updating[index] ? 'animate-spin' : ''}`} />
-              </Button>
+
+              {provider.vehicleType !== 'Inline' && (
+                <Button
+                  isIconOnly
+                  title={t('common.updater.update')}
+                  className="ml-2"
+                  size="sm"
+                  onPress={() => {
+                    onUpdate(provider.name, index)
+                  }}
+                >
+                  <IoMdRefresh className={`text-lg ${updating[index] ? 'animate-spin' : ''}`} />
+                </Button>
+              )}
             </div>
           </SettingItem>
           <SettingItem
