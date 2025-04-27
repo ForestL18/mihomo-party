@@ -59,9 +59,9 @@ async function prepareProfileWorkDir(current: string | undefined): Promise<void>
   }
   await Promise.all([
     copy('country.mmdb'),
-    copy('geoip.metadb'),
-    copy('geoip.dat'),
-    copy('geosite.dat'),
+    // copy('geoip.metadb'),
+    // copy('geoip.dat'),
+    // copy('geosite.dat'),
     copy('ASN.mmdb')
   ])
 }

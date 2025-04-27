@@ -60,8 +60,7 @@ const ProxyProvider: React.FC = () => {
         return provider
       })
 
-      .filter(provider => 'subscriptionInfo' in provider)
-
+      .filter(provider => provider.vehicleType !== 'Compatible')
       .sort((a, b) => {
         if (a.vehicleType === 'File' && b.vehicleType !== 'File') {
           return -1
