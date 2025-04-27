@@ -16,8 +16,8 @@ if (process.argv.slice(2).length !== 0) {
 
 /* ======= mihomo alpha======= */
 const MIHOMO_ALPHA_VERSION_URL =
-  'https://github.com/ForestL18/mihomo/releases/download/Prerelease-winfw/version.txt'
-const MIHOMO_ALPHA_URL_PREFIX = `https://github.com/ForestL18/mihomo/releases/download/Prerelease-winfw`
+  'https://github.com/ForestL18/mihomo/releases/download/Prerelease-beta/version.txt'
+const MIHOMO_ALPHA_URL_PREFIX = `https://github.com/ForestL18/mihomo/releases/download/Prerelease-beta`
 let MIHOMO_ALPHA_VERSION
 
 const MIHOMO_ALPHA_MAP = {
