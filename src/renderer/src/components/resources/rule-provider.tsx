@@ -60,7 +60,7 @@ const RuleProvider: React.FC = () => {
       }
       return provider
     })
-
+    /*
     .sort((a, b) => {
       if (a.vehicleType === 'File' && b.vehicleType !== 'File') {
         return -1
@@ -70,6 +70,7 @@ const RuleProvider: React.FC = () => {
       }
       return 0
     })
+    */
   }, [data])
   const [updating, setUpdating] = useState(Array(providers.length).fill(false))
 

@@ -61,6 +61,7 @@ const ProxyProvider: React.FC = () => {
       })
 
       .filter(provider => provider.vehicleType !== 'Compatible')
+      /*
       .sort((a, b) => {
         if (a.vehicleType === 'File' && b.vehicleType !== 'File') {
           return -1
@@ -70,6 +71,7 @@ const ProxyProvider: React.FC = () => {
         }
         return 0
       })
+      */
   }, [data])
   const [updating, setUpdating] = useState(Array(providers.length).fill(false))
 
