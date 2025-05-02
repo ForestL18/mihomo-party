@@ -50,8 +50,10 @@ if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')
         // ignore
       }
       dialog.showErrorBox(
-        i18next.t('common.error.adminRequired'),
-        `${i18next.t('common.error.adminRequired')}\n${createErrorStr}\n${eStr}`
+        // i18next.t('common.error.adminRequired'),
+        // `${i18next.t('common.error.adminRequired')}\n${createErrorStr}\n${eStr}`
+        '首次启动请以管理员权限运行',
+        `首次启动请以管理员权限运行\n${createErrorStr}\n${eStr}`
       )
     } finally {
       app.exit()
