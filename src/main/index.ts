@@ -38,7 +38,22 @@ if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')
       if (!existsSync(path.join(taskDir(), 'mihomo-party-run.exe'))) {
         throw new Error('mihomo-party-run.exe not found')
       } else {
-        execSync('%SystemRoot%\\System32\\schtasks.exe /run /tn mihomo-party-run')
+        try {
+          execSync('%SystemRoot%\\System32\\schtasks.exe /run /tn mihomo-party-run')
+        } catch (scheduleError) {
+          const psCommand = `Start-Process -FilePath "${exePath()}" -Verb RunAs -WindowStyle Normal`
+
+          const psScriptPath = path.join(taskDir(), 'elevate.ps1')
+          writeFileSync(psScriptPath, psCommand);
+
+          // execSync阻塞当前进程，并启动ps程序以运行ps脚本，ps脚本中的内容为启动异步进程
+          // ps程序运行完脚本后立即结束，execSync停止阻塞继续运行，而启动的异步进程继续运行
+          execSync(`powershell.exe -ExecutionPolicy Bypass -File "${psScriptPath}"`, {
+            windowsHide: true
+          })
+
+          app.exit()
+        }
       }
     } catch (e) {
       let createErrorStr = `${createError}`
