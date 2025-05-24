@@ -23,11 +23,10 @@ const Tun: React.FC = () => {
     'auto-route': autoRoute = true,
     'auto-redirect': autoRedirect = false,
     'auto-detect-interface': autoDetectInterface = true,
-    'strict-route': strictRoute = false,
-    'endpoint-independent-nat': endpointIndependentNat = false,
-    mtu = 1500,
     'dns-hijack': dnsHijack = ['any:53'],
-    'route-exclude-address': routeExcludeAddress = []
+    'route-exclude-address': routeExcludeAddress = [],
+    'strict-route': strictRoute = false,
+    mtu = 1500
   } = tun || {}
   const [changed, setChanged] = useState(false)
   const [values, originSetValues] = useState({
@@ -36,11 +35,10 @@ const Tun: React.FC = () => {
     autoRoute,
     autoRedirect,
     autoDetectInterface,
-    strictRoute,
-    endpointIndependentNat,
-    mtu,
     dnsHijack,
-    routeExcludeAddress
+    strictRoute,
+    routeExcludeAddress,
+    mtu
   })
   const setValues = (v: typeof values): void => {
     originSetValues(v)
@@ -87,11 +85,10 @@ const Tun: React.FC = () => {
                     'auto-route': values.autoRoute,
                     'auto-redirect': values.autoRedirect,
                     'auto-detect-interface': values.autoDetectInterface,
-                    'strict-route': values.strictRoute,
-                    'endpoint-independent-nat': values.endpointIndependentNat,
-                    mtu: values.mtu,
                     'dns-hijack': values.dnsHijack,
-                    'route-exclude-address': values.routeExcludeAddress
+                    'strict-route': values.strictRoute,
+                    'route-exclude-address': values.routeExcludeAddress,
+                    mtu: values.mtu
                   }
                 })
               }
@@ -155,6 +152,19 @@ const Tun: React.FC = () => {
               />
             </SettingItem>
           )}
+
+          <SettingItem title={t('tun.stack.title')} divider>
+            <Tabs
+              size="sm"
+              color="primary"
+              selectedKey={values.stack}
+              onSelectionChange={(key: Key) => setValues({ ...values, stack: key as TunStack })}
+            >
+              <Tab key="gvisor" title="gVisor" />
+              <Tab key="mixed" title="Mixed" />
+              <Tab key="system" title="System" />
+            </Tabs>
+          </SettingItem>
           {platform !== 'darwin' && (
             <SettingItem title={t('tun.device.title')} divider>
               <Input
@@ -167,17 +177,15 @@ const Tun: React.FC = () => {
               />
             </SettingItem>
           )}
-          <SettingItem title={t('tun.stack.title')} divider>
-            <Tabs
+
+          <SettingItem title={t('tun.strictRoute')} divider>
+            <Switch
               size="sm"
-              color="primary"
-              selectedKey={values.stack}
-              onSelectionChange={(key: Key) => setValues({ ...values, stack: key as TunStack })}
-            >
-              <Tab key="gvisor" title="gVisor" />
-              <Tab key="mixed" title="Mixed" />
-              <Tab key="system" title="System" />
-            </Tabs>
+              isSelected={values.strictRoute}
+              onValueChange={(v) => {
+                setValues({ ...values, strictRoute: v })
+              }}
+            />
           </SettingItem>
           <SettingItem title={t('tun.autoRoute')} divider>
             <Switch
@@ -205,24 +213,6 @@ const Tun: React.FC = () => {
               isSelected={values.autoDetectInterface}
               onValueChange={(v) => {
                 setValues({ ...values, autoDetectInterface: v })
-              }}
-            />
-          </SettingItem>
-          <SettingItem title={t('tun.strictRoute')} divider>
-            <Switch
-              size="sm"
-              isSelected={values.strictRoute}
-              onValueChange={(v) => {
-                setValues({ ...values, strictRoute: v })
-              }}
-            />
-          </SettingItem>
-          <SettingItem title={t('tun.endpointIndependentNat')} divider>
-            <Switch
-              size="sm"
-              isSelected={values.endpointIndependentNat}
-              onValueChange={(v) => {
-                setValues({ ...values, endpointIndependentNat: v })
               }}
             />
           </SettingItem>
