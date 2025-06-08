@@ -35,7 +35,7 @@ const SiderConfig: FC = () => {
     sysproxyCardStatus: appConfig?.sysproxyCardStatus || 'col-span-1',
     tunCardStatus: appConfig?.tunCardStatus || 'col-span-1',
     profileCardStatus: appConfig?.profileCardStatus || 'col-span-2',
-    proxyCardStatus: appConfig?.proxyCardStatus || 'col-span-1',
+    proxyCardStatus: appConfig?.proxyCardStatus || 'col-span-2',
     ruleCardStatus: appConfig?.ruleCardStatus || 'col-span-1',
     resourceCardStatus: appConfig?.resourceCardStatus || 'col-span-1',
     overrideCardStatus: appConfig?.overrideCardStatus || 'col-span-1',

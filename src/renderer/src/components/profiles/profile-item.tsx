@@ -179,11 +179,15 @@ const ProfileItem: React.FC<Props> = (props) => {
         isPressable
         onPress={() => {
           if (disableSelect) return
+          if (isCurrent) {
+            setOpenFileEditor(true)
+          } else {
           setSelecting(true)
           onPress().finally(() => {
             setSelecting(false)
           })
-        }}
+        }
+      }}
         className={`${isCurrent ? 'bg-primary' : ''} ${selecting ? 'blur-sm' : ''}`}
       >
         <div ref={setNodeRef} {...attributes} {...listeners} className="w-full h-full">
