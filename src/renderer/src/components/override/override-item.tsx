@@ -74,7 +74,7 @@ const OverrideItem: React.FC<Props> = (props) => {
       {
         key: 'open-file',
         label: t('override.menuItems.openFile'),
-        showDivider: false,
+        showDivider: info.ext === 'yaml',
         color: 'default',
         className: ''
       } as MenuItem,
