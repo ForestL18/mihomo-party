@@ -25,6 +25,19 @@ import i18next from 'i18next'
 let quitTimeout: NodeJS.Timeout | null = null
 export let mainWindow: BrowserWindow | null = null
 
+// 检查UAC是否启用
+function isUACEnabled(): boolean {
+  try {
+    const result = execSync(
+      'reg query "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v ConsentPromptBehaviorAdmin',
+      { encoding: 'utf8', timeout: 5000 }
+    )
+    return !result.includes('0x0')
+  } catch {
+    return false // 如果检测失败，假设UAC关闭
+  }
+}
+
 if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')) {
   try {
     createElevateTask()
@@ -41,6 +54,16 @@ if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')
         try {
           execSync('%SystemRoot%\\System32\\schtasks.exe /run /tn mihomo-party-run')
         } catch (scheduleError) {
+          if (!isUACEnabled()) {
+            // UAC关闭，直接提示用户手动以管理员身份运行
+            dialog.showErrorBox(
+              '首次启动请以管理员权限运行',
+              '检测到UAC已关闭，无法自动提升权限\n请右键点击应用程序图标，选择"以管理员身份运行"'
+            )
+            app.exit()
+          }
+
+          // UAC正常，继续原有的PowerShell提升逻辑
           const psCommand = `Start-Process -FilePath "${exePath()}" -Verb RunAs -WindowStyle Normal`
 
           const psScriptPath = path.join(taskDir(), 'elevate.ps1')
@@ -68,7 +91,7 @@ if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')
         // i18next.t('common.error.adminRequired'),
         // `${i18next.t('common.error.adminRequired')}\n${createErrorStr}\n${eStr}`
         '首次启动请以管理员权限运行',
-        `首次启动请以管理员权限运行\n${createErrorStr}\n${eStr}`
+        `请右键点击应用程序图标，选择"以管理员身份运行"\n${createErrorStr}\n${eStr}`
       )
     } finally {
       app.exit()
