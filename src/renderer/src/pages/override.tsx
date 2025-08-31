@@ -24,7 +24,6 @@ import { useOverrideConfig } from '@renderer/hooks/use-override-config'
 import OverrideItem from '@renderer/components/override/override-item'
 import { FaPlus } from 'react-icons/fa6'
 import { HiOutlineDocumentText } from 'react-icons/hi'
-import { RiArchiveLine } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
 
 const Override: React.FC = () => {
@@ -133,22 +132,10 @@ const Override: React.FC = () => {
             isIconOnly
             className="app-nodrag"
             onPress={() => {
-              open('https://mihomo.party/docs/guide/override')
+              open('https://github.com/ForestL18/clash-party-docs/blob/master/pages/docs/guide/override/yaml.mdx')
             }}
           >
             <HiOutlineDocumentText className="text-lg" />
-          </Button>
-          <Button
-            className="app-nodrag"
-            title={t('override.repository')}
-            isIconOnly
-            variant="light"
-            size="sm"
-            onPress={() => {
-              open('https://github.com/mihomo-party-org/override-hub')
-            }}
-          >
-            <RiArchiveLine className="text-lg" />
           </Button>
         </>
       }

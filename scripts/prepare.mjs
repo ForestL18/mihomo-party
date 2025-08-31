@@ -269,12 +269,12 @@ const resolveEnableLoopback = () =>
 const resolveSysproxy = () =>
   resolveResource({
     file: 'sysproxy.exe',
-    downloadURL: `https://github.com/mihomo-party-org/sysproxy/releases/download/${arch}/sysproxy.exe`
+    downloadURL: `https://github.com/ForestL18/sysproxy/raw/refs/heads/release/${arch}/sysproxy.exe`
   })
 const resolveRunner = () =>
   resolveResource({
     file: 'mihomo-party-run.exe',
-    downloadURL: `https://github.com/mihomo-party-org/mihomo-party-run/releases/download/${arch}/mihomo-party-run.exe`
+    downloadURL: `https://github.com/ForestL18/mihomo-party-run/raw/refs/heads/release/${arch}/mihomo-party-run.exe`
   })
 
 const resolveMonitor = async () => {
@@ -284,7 +284,7 @@ const resolveMonitor = async () => {
     fs.mkdirSync(tempDir, { recursive: true })
   }
   await downloadFile(
-    `https://github.com/mihomo-party-org/mihomo-party-run/releases/download/monitor/${arch}.zip`,
+    `https://github.com/ForestL18/mihomo-party-run/raw/refs/heads/release/monitor/${arch}.zip`,
     tempZip
   )
   const zip = new AdmZip(tempZip)
