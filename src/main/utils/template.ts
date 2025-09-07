@@ -63,7 +63,7 @@ export const defaultControledMihomoConfig: Partial<IMihomoConfig> = {
     'auto-redirect': false,
     'auto-detect-interface': true,
     'strict-route': true,
-    'endpoint-independent-nat': false,
+    'disable-icmp-forwarding': false,
     mtu: 1500,
     'dns-hijack': ['any:53'],
     'route-exclude-address': []

@@ -24,7 +24,7 @@ const Tun: React.FC = () => {
     'auto-redirect': autoRedirect = false,
     'auto-detect-interface': autoDetectInterface = true,
     'strict-route': strictRoute = false,
-    'endpoint-independent-nat': endpointIndependentNat = false,
+    'disable-icmp-forwarding': disableIcmpForwarding = false,
     mtu = 1500,
     'dns-hijack': dnsHijack = ['any:53'],
     'route-exclude-address': routeExcludeAddress = []
@@ -37,7 +37,7 @@ const Tun: React.FC = () => {
     autoRedirect,
     autoDetectInterface,
     strictRoute,
-    endpointIndependentNat,
+    disableIcmpForwarding,
     mtu,
     dnsHijack,
     routeExcludeAddress
@@ -88,7 +88,7 @@ const Tun: React.FC = () => {
                     'auto-redirect': values.autoRedirect,
                     'auto-detect-interface': values.autoDetectInterface,
                     'strict-route': values.strictRoute,
-                    'endpoint-independent-nat': values.endpointIndependentNat,
+                    'disable-icmp-forwarding': values.disableIcmpForwarding,
                     mtu: values.mtu,
                     'dns-hijack': values.dnsHijack,
                     'route-exclude-address': values.routeExcludeAddress
@@ -217,12 +217,12 @@ const Tun: React.FC = () => {
               }}
             />
           </SettingItem>
-          <SettingItem title={t('tun.endpointIndependentNat')} divider>
+          <SettingItem title={t('tun.disableIcmpForwarding')} divider>
             <Switch
               size="sm"
-              isSelected={values.endpointIndependentNat}
+              isSelected={values.disableIcmpForwarding}
               onValueChange={(v) => {
-                setValues({ ...values, endpointIndependentNat: v })
+                setValues({ ...values, disableIcmpForwarding: v })
               }}
             />
           </SettingItem>

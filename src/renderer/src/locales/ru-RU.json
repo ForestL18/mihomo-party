@@ -291,7 +291,7 @@
   "tun.autoRedirect": "Автоматическое перенаправление TCP",
   "tun.autoDetectInterface": "Автоопределение интерфейса",
   "tun.strictRoute": "Строгая маршрутизация",
-  "tun.endpointIndependentNat": "Независимый от конечной точки NAT",
+  "tun.disableIcmpForwarding": "Отключить пересылку ICMP",
   "tun.dnsHijack": "Перехват DNS",
   "tun.excludeAddress.title": "Исключить пользовательские сети",
   "tun.excludeAddress.placeholder": "Пример: 172.20.0.0/16",

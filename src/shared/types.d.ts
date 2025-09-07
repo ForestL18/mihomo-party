@@ -315,7 +315,7 @@ interface IMihomoTunConfig {
   'udp-timeout'?: number
   'iproute2-table-index'?: number
   'iproute2-rule-index'?: number
-  'endpoint-independent-nat'?: boolean
+  'disable-icmp-forwarding'?: boolean
   'route-address-set'?: string[]
   'route-exclude-address-set'?: string[]
   'route-address'?: string[]

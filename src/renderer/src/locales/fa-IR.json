@@ -291,7 +291,7 @@
   "tun.autoRedirect": "تنظیم خودکار بازگردانی TCP",
   "tun.autoDetectInterface": "تشخیص خودکار رابط",
   "tun.strictRoute": "مسیریابی سختگیرانه",
-  "tun.endpointIndependentNat": "نقطه پایانی مستقل NAT",
+  "tun.disableIcmpForwarding": "غیرفعال کردن ارسال ICMP",
   "tun.dnsHijack": "ربایش DNS",
   "tun.excludeAddress.title": "مستثنی کردن شبکه‌های سفارشی",
   "tun.excludeAddress.placeholder": "مثال: 172.20.0.0/16",

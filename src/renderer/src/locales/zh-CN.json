@@ -291,7 +291,7 @@
   "tun.autoRedirect": "自动设置TCP重定向",
   "tun.autoDetectInterface": "自动选择流量出口接口",
   "tun.strictRoute": "严格路由",
-  "tun.endpointIndependentNat": "端点无关 NAT",
+  "tun.disableIcmpForwarding": "禁用 ICMP 转发",
   "tun.dnsHijack": "DNS 劫持",
   "tun.excludeAddress.title": "排除自定义网段",
   "tun.excludeAddress.placeholder": "例: 172.20.0.0/16",

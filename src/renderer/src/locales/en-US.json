@@ -291,7 +291,7 @@
   "tun.autoRedirect": "Auto Set TCP Redirect",
   "tun.autoDetectInterface": "Auto Detect Interface",
   "tun.strictRoute": "Strict Route",
-  "tun.endpointIndependentNat": "Endpoint Independent NAT",
+  "tun.disableIcmpForwarding": "Disable ICMP Forwarding",
   "tun.dnsHijack": "DNS Hijack",
   "tun.excludeAddress.title": "Exclude Custom Networks",
   "tun.excludeAddress.placeholder": "Example: 172.20.0.0/16",
