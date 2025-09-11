@@ -120,7 +120,7 @@
   "mihomo.disallowedIpSegments": "禁止连接的 IP 段",
   "mihomo.userVerification": "用户验证",
   "mihomo.skipAuthPrefixes": "允许跳过验证的 IP 段",
-  "mihomo.useRttDelayTest": "使用 1-RTT 延迟测试",
+  "mihomo.unifiedDelay": "统一延迟",
   "mihomo.tcpConcurrent": "TCP 并发",
   "mihomo.storeSelectedNode": "存储选择节点",
   "mihomo.storeFakeIp": "存储 FakeIP",

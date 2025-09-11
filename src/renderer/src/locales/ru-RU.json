@@ -120,7 +120,7 @@
   "mihomo.disallowedIpSegments": "Запрещённые IP сегменты",
   "mihomo.userVerification": "Проверка пользователя",
   "mihomo.skipAuthPrefixes": "Пропускать проверку для IP сегментов",
-  "mihomo.useRttDelayTest": "Использовать 1-RTT тест задержки",
+  "mihomo.unifiedDelay": "Унифицированная задержка",
   "mihomo.tcpConcurrent": "TCP параллельность",
   "mihomo.storeSelectedNode": "Сохранять выбранный узел",
   "mihomo.storeFakeIp": "Сохранять Fake IP",

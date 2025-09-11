@@ -120,7 +120,7 @@
   "mihomo.disallowedIpSegments": "Disallowed IP Segments",
   "mihomo.userVerification": "User Verification",
   "mihomo.skipAuthPrefixes": "Skip Auth IP Segments",
-  "mihomo.useRttDelayTest": "Use 1-RTT Delay Test",
+  "mihomo.unifiedDelay": "Unified Delay",
   "mihomo.tcpConcurrent": "TCP Concurrent",
   "mihomo.storeSelectedNode": "Store Selected Node",
   "mihomo.storeFakeIp": "Store Fake IP",

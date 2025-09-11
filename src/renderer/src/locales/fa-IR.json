@@ -120,7 +120,7 @@
   "mihomo.disallowedIpSegments": "بخش‌های IP غیرمجاز",
   "mihomo.userVerification": "تایید هویت کاربر",
   "mihomo.skipAuthPrefixes": "رد کردن تایید هویت برای بخش‌های IP",
-  "mihomo.useRttDelayTest": "استفاده از تست تاخیر 1-RTT",
+  "mihomo.unifiedDelay": "تأخیر یکپارچه",
   "mihomo.tcpConcurrent": "همزمانی TCP",
   "mihomo.storeSelectedNode": "ذخیره گره انتخاب شده",
   "mihomo.storeFakeIp": "ذخیره IP جعلی",

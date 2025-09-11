@@ -613,7 +613,7 @@ const Mihomo: React.FC = () => {
             })}
           </div>
           <Divider className="mb-2" />
-          <SettingItem title={t('mihomo.useRttDelayTest')} divider>
+          <SettingItem title={t('mihomo.unifiedDelay')} divider>
             <Switch
               size="sm"
               isSelected={unifiedDelay}
