@@ -67,7 +67,9 @@ export async function startCore(detached = false): Promise<Promise<void>[]> {
     disableLoopbackDetector = false,
     disableEmbedCA = false,
     disableSystemCA = false,
-    skipSafePathCheck = false
+    skipSystemIpv6Check = false,
+    skipSafePathCheck = false,
+    safePaths = ''
   } = await getAppConfig()
   const { 'log-level': logLevel } = await getControledMihomoConfig()
   if (existsSync(path.join(dataDir(), 'core.pid'))) {
@@ -101,7 +103,9 @@ export async function startCore(detached = false): Promise<Promise<void>[]> {
     DISABLE_LOOPBACK_DETECTOR: String(disableLoopbackDetector),
     DISABLE_EMBED_CA: String(disableEmbedCA),
     DISABLE_SYSTEM_CA: String(disableSystemCA),
-    SKIP_SAFE_PATH_CHECK: String(skipSafePathCheck)
+    SKIP_SYSTEM_IPV6_CHECK: String(skipSystemIpv6Check),
+    SKIP_SAFE_PATH_CHECK: String(skipSafePathCheck),
+    SAFE_PATHS: safePaths
   }
   child = spawn(
     corePath,
@@ -232,13 +236,15 @@ async function checkProfile(): Promise<void> {
   const {
     core = 'mihomo',
     diffWorkDir = false,
-    skipSafePathCheck = false
+    skipSafePathCheck = false,
+    safePaths = ''
   } = await getAppConfig()
   const { current } = await getProfileConfig()
   const corePath = mihomoCorePath(core)
   const execFilePromise = promisify(execFile)
   const env = {
-    SKIP_SAFE_PATH_CHECK: String(skipSafePathCheck)
+    SKIP_SAFE_PATH_CHECK: String(skipSafePathCheck),
+    SAFE_PATHS: safePaths
   }
   try {
     await execFilePromise(corePath, [

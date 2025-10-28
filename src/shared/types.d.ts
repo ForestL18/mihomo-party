@@ -222,7 +222,9 @@ interface IAppConfig {
   disableLoopbackDetector: boolean
   disableEmbedCA: boolean
   disableSystemCA: boolean
+  skipSystemIpv6Check: boolean
   skipSafePathCheck: boolean
+  safePaths: string
   proxyDisplayMode: 'simple' | 'full'
   proxyDisplayOrder: 'default' | 'delay' | 'name'
   profileDisplayDate?: 'expire' | 'update'

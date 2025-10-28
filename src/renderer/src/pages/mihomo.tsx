@@ -34,7 +34,9 @@ const Mihomo: React.FC = () => {
     disableLoopbackDetector,
     disableEmbedCA,
     disableSystemCA,
-    skipSafePathCheck } = appConfig || {}
+    skipSystemIpv6Check,
+    skipSafePathCheck,
+    safePaths = '' } = appConfig || {}
   const { controledMihomoConfig, patchControledMihomoConfig } = useControledMihomoConfig()
   const {
     ipv6,
@@ -58,6 +60,7 @@ const Mihomo: React.FC = () => {
   } = controledMihomoConfig || {}
   const { 'store-selected': storeSelected, 'store-fake-ip': storeFakeIp } = profile
 
+  const [safePathsInput, setSafePathsInput] = useState(safePaths)
   const [mixedPortInput, setMixedPortInput] = useState(mixedPort)
   const [socksPortInput, setSocksPortInput] = useState(socksPort)
   const [httpPortInput, setHttpPortInput] = useState(httpPort)
@@ -658,15 +661,6 @@ const Mihomo: React.FC = () => {
               }}
             />
           </SettingItem>
-          <SettingItem title={t('mihomo.skipSafePathCheck')} divider>
-            <Switch
-              size="sm"
-              isSelected={skipSafePathCheck}
-              onValueChange={(v) => {
-                handleConfigChangeWithRestart('skipSafePathCheck', v)
-              }}
-            />
-          </SettingItem>
           <SettingItem title={t('mihomo.disableEmbedCA')} divider>
             <Switch
               size="sm"
@@ -684,6 +678,49 @@ const Mihomo: React.FC = () => {
                 handleConfigChangeWithRestart('disableSystemCA', v)
               }}
             />
+          </SettingItem>
+          <SettingItem title={t('mihomo.skipSystemIpv6Check')} divider>
+            <Switch
+              size="sm"
+              isSelected={skipSystemIpv6Check}
+              onValueChange={(v) => {
+                handleConfigChangeWithRestart('skipSystemIpv6Check', v)
+              }}
+            />
+          </SettingItem>
+          <SettingItem title={t('mihomo.skipSafePathCheck')} divider>
+            <Switch
+              size="sm"
+              isSelected={skipSafePathCheck}
+              onValueChange={(v) => {
+                handleConfigChangeWithRestart('skipSafePathCheck', v)
+              }}
+            />
+          </SettingItem>
+          <SettingItem title={t('mihomo.safePaths')} divider>
+            <div className="flex w-[70%]">
+              {safePathsInput !== safePaths && (
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="mr-2"
+                  onPress={() => {
+                    handleConfigChangeWithRestart('safePaths', safePathsInput)
+                  }}
+                >
+                  {t('mihomo.confirm')}
+                </Button>
+              )}
+
+              <Input
+                size="sm"
+                // className="w-[200px]"
+                value={safePathsInput}
+                onValueChange={(v) => {
+                  setSafePathsInput(v)
+                }}
+              />
+            </div>
           </SettingItem>
           <SettingItem title={t('mihomo.logRetentionDays')} divider>
             <Input
