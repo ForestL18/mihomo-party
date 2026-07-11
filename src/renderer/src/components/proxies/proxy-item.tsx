@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 interface Props {
   mutateProxies: () => void
-  onProxyDelay: (proxy: string, url?: string) => Promise<IMihomoDelay>
+  onProxyDelay: (proxy: string, url?: string, providerName?: string) => Promise<IMihomoDelay>
   proxyDisplayMode: 'simple' | 'full'
   proxy: IMihomoProxy | IMihomoGroup
   group: IMihomoMixedGroup
@@ -41,7 +41,7 @@ const ProxyItem: React.FC<Props> = (props) => {
 
   const onDelay = (): void => {
     setLoading(true)
-    onProxyDelay(proxy.name, group.testUrl).finally(() => {
+    onProxyDelay(proxy.name, group.testUrl, proxy['provider-name']).finally(() => {
       mutateProxies()
       setLoading(false)
     })

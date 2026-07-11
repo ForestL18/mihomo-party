@@ -146,6 +146,7 @@ interface IMihomoProxy {
   xudp: boolean
   mptcp: boolean
   smux: boolean
+  'provider-name'?: string
 }
 
 interface IMihomoGroup {
@@ -163,6 +164,7 @@ interface IMihomoGroup {
   type: MihomoGroupType
   udp: boolean
   xudp: boolean
+  'provider-name'?: string
 }
 
 interface IMihomoProxies {

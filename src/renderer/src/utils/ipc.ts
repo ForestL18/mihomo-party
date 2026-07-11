@@ -71,8 +71,8 @@ export async function mihomoUpgrade(): Promise<void> {
   return ipcErrorWrapper(await window.electron.ipcRenderer.invoke('mihomoUpgrade'))
 }
 
-export async function mihomoProxyDelay(proxy: string, url?: string): Promise<IMihomoDelay> {
-  return ipcErrorWrapper(await window.electron.ipcRenderer.invoke('mihomoProxyDelay', proxy, url))
+export async function mihomoProxyDelay(proxy: string, url?: string, providerName?: string): Promise<IMihomoDelay> {
+  return ipcErrorWrapper(await window.electron.ipcRenderer.invoke('mihomoProxyDelay', proxy, url, providerName))
 }
 
 export async function mihomoGroupDelay(group: string, url?: string): Promise<IMihomoGroupDelay> {

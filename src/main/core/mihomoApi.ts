@@ -66,6 +66,26 @@ export const mihomoRules = async (): Promise<IMihomoRulesInfo> => {
   return await instance.get('/rules')
 }
 
+export const mihomoProxiesWithProviders = async (): Promise<IMihomoProxies> => {
+  const [proxiesData, providersData] = await Promise.all([
+    mihomoProxies(),
+    mihomoProxyProviders()
+  ])
+
+  const merged: IMihomoProxies['proxies'] = {}
+
+  for (const provider of Object.values(providersData.providers)) {
+    if (provider.name === 'default' || provider.vehicleType === 'Compatible') continue
+    for (const proxy of provider.proxies ?? []) {
+      merged[proxy.name] = { ...proxy, 'provider-name': provider.name }
+    }
+  }
+
+  Object.assign(merged, proxiesData.proxies)
+
+  return { proxies: merged }
+}
+
 export const mihomoProxies = async (): Promise<IMihomoProxies> => {
   const instance = await getAxios()
   const proxies = (await instance.get('/proxies')) as IMihomoProxies
@@ -78,7 +98,7 @@ export const mihomoProxies = async (): Promise<IMihomoProxies> => {
 export const mihomoGroups = async (): Promise<IMihomoMixedGroup[]> => {
   const { mode = 'rule' } = await getControledMihomoConfig()
   if (mode === 'direct') return []
-  const proxies = await mihomoProxies()
+  const proxies = await mihomoProxiesWithProviders()
   const runtime = await getRuntimeConfig()
   const groups: IMihomoMixedGroup[] = []
   runtime?.['proxy-groups']?.forEach((group: { name: string; url?: string }) => {
@@ -139,7 +159,33 @@ export const mihomoUpgradeGeo = async (): Promise<void> => {
   return await instance.post('/configs/geo')
 }
 
-export const mihomoProxyDelay = async (proxy: string, url?: string): Promise<IMihomoDelay> => {
+export const mihomoProviderProxyDelay = async (
+  provider: string,
+  proxy: string,
+  url?: string
+): Promise<IMihomoDelay> => {
+  const appConfig = await getAppConfig()
+  const { delayTestUrl, delayTestTimeout } = appConfig
+  const instance = await getAxios()
+  return await instance.get(
+    `/providers/proxies/${encodeURIComponent(provider)}/${encodeURIComponent(proxy)}/healthcheck`,
+    {
+      params: {
+        url: url || delayTestUrl || 'https://www.gstatic.com/generate_204',
+        timeout: delayTestTimeout || 5000
+      }
+    }
+  )
+}
+
+export const mihomoProxyDelay = async (
+  proxy: string,
+  url?: string,
+  providerName?: string
+): Promise<IMihomoDelay> => {
+  if (providerName) {
+    return mihomoProviderProxyDelay(providerName, proxy, url)
+  }
   const appConfig = await getAppConfig()
   const { delayTestUrl, delayTestTimeout } = appConfig
   const instance = await getAxios()

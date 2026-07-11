@@ -134,8 +134,8 @@ export function registerIpcMainHandlers(): void {
   ipcMain.handle('mihomoUnfixedProxy', (_e, group) => ipcErrorWrapper(mihomoUnfixedProxy)(group))
   ipcMain.handle('mihomoUpgradeGeo', ipcErrorWrapper(mihomoUpgradeGeo))
   ipcMain.handle('mihomoUpgrade', ipcErrorWrapper(mihomoUpgrade))
-  ipcMain.handle('mihomoProxyDelay', (_e, proxy, url) =>
-    ipcErrorWrapper(mihomoProxyDelay)(proxy, url)
+  ipcMain.handle('mihomoProxyDelay', (_e, proxy, url, providerName) =>
+    ipcErrorWrapper(mihomoProxyDelay)(proxy, url, providerName)
   )
   ipcMain.handle('mihomoGroupDelay', (_e, group, url) =>
     ipcErrorWrapper(mihomoGroupDelay)(group, url)

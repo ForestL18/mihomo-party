@@ -121,9 +121,9 @@ const Proxies: React.FC = () => {
     mutate()
   }, [autoCloseConnection, mutate])
 
-  const onProxyDelay = useCallback(async (proxy: string, url?: string): Promise<IMihomoDelay> => {
-    return await mihomoProxyDelay(proxy, url)
-  }, [])
+  const onProxyDelay = useCallback(async (proxy: string, url?: string, providerName?: string): Promise<IMihomoDelay> => {
+      return await mihomoProxyDelay(proxy, url, providerName)
+    }, [])
 
   const onGroupDelay = useCallback(async (index: number): Promise<void> => {
     if (allProxies[index].length === 0) {
@@ -146,7 +146,7 @@ const Proxies: React.FC = () => {
       for (const proxy of allProxies[index]) {
         const promise = Promise.resolve().then(async () => {
           try {
-            await mihomoProxyDelay(proxy.name, groups[index].testUrl)
+            await mihomoProxyDelay(proxy.name, groups[index].testUrl, proxy['provider-name'])
           } catch {
             // ignore
           } finally {
