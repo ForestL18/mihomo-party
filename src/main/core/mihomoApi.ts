@@ -24,7 +24,7 @@ export const getAxios = async (force: boolean = false): Promise<AxiosInstance> =
   axiosIns = axios.create({
     baseURL: `http://localhost`,
     socketPath: mihomoIpcPath,
-    timeout: 15000
+    timeout: 30000
   })
 
   axiosIns.interceptors.response.use(
