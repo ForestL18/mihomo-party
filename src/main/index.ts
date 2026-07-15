@@ -26,15 +26,39 @@ let quitTimeout: NodeJS.Timeout | null = null
 export let mainWindow: BrowserWindow | null = null
 
 // 检查UAC是否启用
-function isUACEnabled(): boolean {
+// function isUACEnabled(): boolean {
+//   try {
+//     const result = execSync(
+//       'reg query "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v ConsentPromptBehaviorAdmin',
+//       { encoding: 'utf8', timeout: 5000 }
+//     )
+//     return !result.includes('0x0')
+//   } catch {
+//     return false // 如果检测失败，假设UAC关闭
+//   }
+// }
+
+function canPromptUAC(): boolean {
   try {
-    const result = execSync(
-      'reg query "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v ConsentPromptBehaviorAdmin',
-      { encoding: 'utf8', timeout: 5000 }
-    )
-    return !result.includes('0x0')
+    const base = 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System'
+
+    const luaOut = execSync(`reg query "${base}" /v EnableLUA`, {
+      encoding: 'utf8',
+      timeout: 5000
+    })
+    const luaMatch = luaOut.match(/EnableLUA\s+REG_DWORD\s+0x([0-9a-fA-F]+)/)
+    const enableLUA = luaMatch ? parseInt(luaMatch[1], 16) : 0
+
+    const consentOut = execSync(`reg query "${base}" /v ConsentPromptBehaviorAdmin`, {
+      encoding: 'utf8',
+      timeout: 5000
+    })
+    const consentMatch = consentOut.match(/ConsentPromptBehaviorAdmin\s+REG_DWORD\s+0x([0-9a-fA-F]+)/)
+    const consentBehavior = consentMatch ? parseInt(consentMatch[1], 16) : 0
+
+    return enableLUA !== 0 && consentBehavior !== 0
   } catch {
-    return false // 如果检测失败，假设UAC关闭
+    return false
   }
 }
 
@@ -54,7 +78,7 @@ if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')
         try {
           execSync('%SystemRoot%\\System32\\schtasks.exe /run /tn mihomo-party-run')
         } catch (scheduleError) {
-          if (!isUACEnabled()) {
+          if (!canPromptUAC()) {
             // UAC关闭，直接提示用户手动以管理员身份运行
             dialog.showErrorBox(
               '首次启动请以管理员权限运行',
